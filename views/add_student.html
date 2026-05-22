@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Onboard new undergraduate candidates using this professional Admissions intake form featuring real-time input verification, phone standard schemas, and alphanumeric credential guidelines.">
+  <meta name="author" content="Web Engineering Team">
+  <title>Undergraduate Onboarding Portal | Global Institute of Technology</title>
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+
+  <!-- 1. GENERAL SITE HEADER -->
+  <header class="site-header">
+    <div class="container header-container">
+      <a href="/" class="logo-link">
+        <div class="logo-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10v6M2 10l10-5 10 5-10 5z"></path><path d="M6 12v5c0 2 2 3 6 3s6-1 6-3v-5"></path></svg>
+        </div>
+        <span>Global Institute</span>
+      </a>
+
+      <!-- Main Navigation -->
+      <nav class="main-nav" id="main-navigation">
+        <ul class="nav-list">
+          <li><a href="/" class="nav-link">Home</a></li>
+          <li><a href="/dashboard" class="nav-link">Dashboard</a></li>
+          <li><a href="/add-student" class="nav-link active">Admissions</a></li>
+          <li><a href="/about" class="nav-link">About Us</a></li>
+          <li><a href="/contact" class="nav-link">Contact</a></li>
+        </ul>
+      </nav>
+
+      <div class="header-actions">
+        <!-- Theme toggle -->
+        <div class="theme-toggle-btn" id="theme-toggle" title="Switch Theme">
+          <svg class="sun-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
+          <svg class="moon-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+        </div>
+
+        <button class="btn btn-secondary btn-sm" id="sidebar-toggle-btn" title="Toggle Sidebar">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+          <span>Sidebar</span>
+        </button>
+
+        <div class="hamburger" id="mobile-hamburger">
+          <div class="hamburger-box">
+            <span class="hamburger-inner"></span>
+            <span class="hamburger-inner"></span>
+            <span class="hamburger-inner"></span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- 2. FULL GRID LAYOUT WRAPPER -->
+  <div class="dashboard-layout">
+    
+    <!-- DASHBOARD SIDEBAR -->
+    <aside class="dashboard-sidebar" id="dashboard-sidebar">
+      <div class="sidebar-heading">CONSOLE DIRECTORY</div>
+      <nav class="sidebar-menu">
+        <a href="/dashboard" class="sidebar-item">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>
+          All Students
+        </a>
+        <a href="/add-student" class="sidebar-item active">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="16"></line><line x1="8" y1="12" x2="12" y2="12"></line></svg>
+          Onboard Admissions
+        </a>
+      </nav>
+
+      <div class="sidebar-heading">ADMIN RESOURCES</div>
+      <nav class="sidebar-menu">
+        <a href="/about" class="sidebar-item">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
+          System About
+        </a>
+        <a href="/contact" class="sidebar-item">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+          Support Helplines
+        </a>
+      </nav>
+    </aside>
+
+    <!-- CORE MAIN PANEL CONTENT -->
+    <main class="dashboard-main">
+      
+      <!-- Mini path mapping -->
+      <section style="margin-bottom: var(--spacing-lg);">
+        <h1 style="font-size: 1.75rem; font-family: var(--font-display);">Undergraduate Admissions Intake</h1>
+        <p style="font-size: 0.9rem; color: var(--text-secondary);">Submit verified academic profiles to merge into active system indexes instantly.</p>
+      </section>
+
+      <!-- TWO COLUMN GRID FORM + SIDE INFO PANEL -->
+      <section class="form-layout-grid">
+        
+        <!-- Intake Card Container -->
+        <article class="student-form-card">
+          <h2 style="font-size: 1.25rem; font-family: var(--font-display); margin-bottom: var(--spacing-lg);">Candidate Registration</h2>
+          
+          <form id="admission-intake-form" novalidate>
+            
+            <!-- First / Last Name Row -->
+            <div class="form-row-2">
+              <div class="form-group">
+                <label for="firstName" class="form-label">First Name *</label>
+                <input type="text" id="firstName" name="firstName" class="form-input" placeholder="e.g., Alexander" minlength="2" required>
+                <span class="input-feedback" id="firstName-feedback"></span>
+              </div>
+              <div class="form-group">
+                <label for="lastName" class="form-label">Last Name *</label>
+                <input type="text" id="lastName" name="lastName" class="form-input" placeholder="e.g., Wright" minlength="2" required>
+                <span class="input-feedback" id="lastName-feedback"></span>
+              </div>
+            </div>
+
+            <!-- Email / Phone Row -->
+            <div class="form-row-2">
+              <div class="form-group">
+                <label for="email" class="form-label">Institutional Email *</label>
+                <input type="email" id="email" name="email" class="form-input" placeholder="username@university.edu" required>
+                <span class="input-feedback" id="email-feedback"></span>
+              </div>
+              <div class="form-group">
+                <label for="phone" class="form-label">Phone Connection *</label>
+                <input type="text" id="phone" name="phone" class="form-input" placeholder="+1 (555) 000-0000" required>
+                <span class="input-feedback" id="phone-feedback"></span>
+              </div>
+            </div>
+
+            <!-- Age / Gender Row -->
+            <div class="form-row-2">
+              <div class="form-group">
+                <label for="age" class="form-label">Candidate Age *</label>
+                <input type="number" id="age" name="age" class="form-input" placeholder="Age (e.g., 20)" min="16" max="80" required>
+                <span class="input-feedback" id="age-feedback"></span>
+              </div>
+              <div class="form-group">
+                <label for="gender" class="form-label">Declared Gender *</label>
+                <select id="gender" name="gender" class="form-input" style="cursor: pointer;" required>
+                  <option value="" disabled selected>Select gender...</option>
+                  <option value="male">Male</option>
+                  <option value="female">Female</option>
+                  <option value="other">Other</option>
+                </select>
+                <span class="input-feedback" id="gender-feedback"></span>
+              </div>
+            </div>
+
+            <!-- Department selector -->
+            <div class="form-group">
+              <label for="department" class="form-label">Assigned Department / Major *</label>
+              <select id="department" name="department" class="form-input" style="cursor: pointer;" required>
+                <option value="" disabled selected>Select Major course...</option>
+                <option value="Computer Science & Engineering">Computer Science & Engineering</option>
+                <option value="Electrical & Electronic Engineering">Electrical & Electronic Engineering</option>
+                <option value="Mechanical & Aerospace Engineering">Mechanical & Aerospace Engineering</option>
+                <option value="Business Administration & Technology">Business Administration & Technology</option>
+                <option value="Civil & Environmental Engineering">Civil & Environmental Engineering</option>
+                <option value="Biomedical Engineering & Biotech">Biomedical Engineering & Biotech</option>
+                <option value="Data Science & Analytics">Data Science & Analytics</option>
+                <option value="Cybersecurity & Digital Forensics">Cybersecurity & Digital Forensics</option>
+              </select>
+              <span class="input-feedback" id="department-feedback"></span>
+            </div>
+
+            <!-- Campus site -->
+            <div class="form-group">
+              <label for="university" class="form-label">Assigned University Campus *</label>
+              <input type="text" id="university" name="university" class="form-input" value="Global Institute of Technology" required>
+              <span class="input-feedback" id="university-feedback"></span>
+            </div>
+
+            <!-- Address location -->
+            <div class="form-group">
+              <label for="address" class="form-label">Dorm/Residential Location Address</label>
+              <input type="text" id="address" name="address" class="form-input" placeholder="e.g. 104 Housing Wing, Campus Circle">
+              <span class="input-feedback" id="address-feedback"></span>
+            </div>
+
+            <!-- Portal Credentials (Password validation) -->
+            <div class="form-group">
+              <label for="password" class="form-label">Secure Access Key / Portal PIN *</label>
+              <input type="password" id="password" name="password" class="form-input" placeholder="Minimum 8 chars: Upper case, number, symbol" required>
+              <div class="input-feedback" id="password-feedback"></div>
+              
+              <!-- Custom security requirements dashboard helper list -->
+              <div class="password-dashboard" style="display: flex; gap: 8px; margin-top: 6px; font-weight: 500; font-size: 0.725rem; color: var(--text-muted);">
+                <span id="pwd-check-length" style="transition: color var(--transition-fast);">• 8+ Chars</span>
+                <span id="pwd-check-uppercase" style="transition: color var(--transition-fast);">• 1 Uppercase</span>
+                <span id="pwd-check-number" style="transition: color var(--transition-fast);">• 1 Number</span>
+              </div>
+            </div>
+
+            <!-- Submission Actions -->
+            <div class="form-group" style="display: flex; gap: var(--spacing-md); margin-top: var(--spacing-xl); border-top: 1px solid var(--border-color); padding-top: var(--spacing-lg);">
+              <button type="submit" class="btn btn-accent" id="btn-admission-submit" style="flex: 1">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                Complete Onboarding
+              </button>
+              <a href="/dashboard" class="btn btn-secondary" style="flex: 1">Return Directory</a>
+            </div>
+
+          </form>
+        </article>
+
+        <!-- Right Guidelines Sidebar -->
+        <aside class="form-tips-card">
+          <h3 class="form-tips-headline">Intake Specifications</h3>
+          <div class="form-tips-list">
+            
+            <div class="form-tips-item">
+              <div class="form-tips-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+              </div>
+              <p><strong>Absolute Requirements</strong>: All marked properties (*) must be evaluated with valid inputs prior to submission. Incomplete entries will cause backend API refusals.</p>
+            </div>
+
+            <div class="form-tips-item">
+              <div class="form-tips-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
+              </div>
+              <p><strong>Age Limits</strong>: Undergraduates matriculated at Global Tech must range from 16 to 80 years of age. Systems automatically flag outliers.</p>
+            </div>
+
+            <div class="form-tips-item">
+              <div class="form-tips-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+              </div>
+              <p><strong>Security Guidelines</strong>: The Student PIN key allows candidate access to grade logs. Must contain 8+ characters, at least 1 uppercase letter, and 1 integer digit.</p>
+            </div>
+
+            <div class="form-tips-item" style="border-top: 1px solid var(--border-color); padding-top: var(--spacing-sm); margin-top: var(--spacing-sm);">
+              <p style="font-size: 0.8rem; line-height: 1.4; color: var(--text-muted);">After successfully submitting, candidate information is merged into server active tables and lists. To confirm, navigate to the <a href="/dashboard">Directory console</a> and filter by department.</p>
+            </div>
+
+          </div>
+        </aside>
+
+      </section>
+
+    </main>
+  </div>
+
+  <div class="back-to-top" id="scroll-to-top-btn">
+    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="18 15 12 9 6 15"></polyline></svg>
+  </div>
+
+  <div class="spinner-backdrop" id="global-spinner">
+    <div class="spinner"></div>
+  </div>
+
+  <!-- Common Main JS modules -->
+  <script src="/js/main.js" type="module"></script>
+  <!-- Custom Form Validators JS -->
+  <script type="module">
+    document.addEventListener("DOMContentLoaded", () => {
+      setupFormValidation();
+    });
+
+    function setupFormValidation() {
+      const form = document.getElementById("admission-intake-form");
+      if (!form) return;
+
+      const fName = document.getElementById("firstName");
+      const lName = document.getElementById("lastName");
+      const email = document.getElementById("email");
+      const phone = document.getElementById("phone");
+      const age = document.getElementById("age");
+      const gender = document.getElementById("gender");
+      const dept = document.getElementById("department");
+      const pwd = document.getElementById("password");
+
+      // Validate on-the-fly listeners
+      fName.addEventListener("input", () => validateRequired(fName, "firstName-feedback", "First name contains 2+ letters."));
+      lName.addEventListener("input", () => validateRequired(lName, "lastName-feedback", "Last name contains 2+ letters."));
+      
+      email.addEventListener("input", () => {
+        const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        const valid = regex.test(email.value.trim());
+        toggleValidationClasses(email, valid, "email-feedback", "Valid email address format.", "Enter a matching format: username@domain.com");
+      });
+
+      phone.addEventListener("input", () => {
+        // Look for basic number length, can format too
+        const raw = phone.value.trim();
+        const valid = raw.length >= 7 && /\+?[d\-()\s]*/.test(raw);
+        toggleValidationClasses(phone, valid, "phone-feedback", "Phone connection format recognized.", "Must contain 7+ chars (+1 (555) 000-0000).");
+      });
+
+      age.addEventListener("input", () => {
+        const val = parseInt(age.value, 10);
+        const valid = !isNaN(val) && val >= 16 && val <= 80;
+        toggleValidationClasses(age, valid, "age-feedback", "Authorized age range.", "Age must fall in range 16 - 80 years.");
+      });
+
+      gender.addEventListener("change", () => {
+        const valid = gender.value !== "";
+        toggleValidationClasses(gender, valid, "gender-feedback", "Selection loaded.", "Please choose declared gender.");
+      });
+
+      dept.addEventListener("change", () => {
+        const valid = dept.value !== "";
+        toggleValidationClasses(dept, valid, "department-feedback", "Major course linked.", "Please map catalog major.");
+      });
+
+      // Complex Password check
+      pwd.addEventListener("input", () => {
+        const val = pwd.value;
+        const hasLength = val.length >= 8;
+        const hasUpper = /[A-Z]/.test(val);
+        const hasNum = /[0-9]/.test(val);
+
+        // Update indicators
+        updatePasswordIndicator("pwd-check-length", hasLength);
+        updatePasswordIndicator("pwd-check-uppercase", hasUpper);
+        updatePasswordIndicator("pwd-check-number", hasNum);
+
+        const valid = hasLength && hasUpper && hasNum;
+        toggleValidationClasses(pwd, valid, "password-feedback", "Secure Student Access PIN verified.", "Strong PIN key required constraint.");
+      });
+
+      // Submit interception
+      form.addEventListener("submit", async (e) => {
+        e.preventDefault();
+
+        // Single full validation run
+        const isFNameValid = validateRequired(fName, "firstName-feedback", "Ok");
+        const isLNameValid = validateRequired(lName, "lastName-feedback", "Ok");
+        const isEmailValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.value.trim());
+        const isPhoneValid = phone.value.trim().length >= 7;
+        const isAgeValid = parseInt(age.value, 10) >= 16 && parseInt(age.value, 10) <= 80;
+        const isGenderValid = gender.value !== "";
+        const isDeptValid = dept.value !== "";
+        
+        const pwdVal = pwd.value;
+        const isPwdValid = pwdVal.length >= 8 && /[A-Z]/.test(pwdVal) && /[0-9]/.test(pwdVal);
+
+        // Make sure indicators visible
+        toggleValidationClasses(email, isEmailValid, "email-feedback", "Valid.", "Please enter username@domain.com");
+        toggleValidationClasses(phone, isPhoneValid, "phone-feedback", "Valid.", "Telephone number is too short.");
+        toggleValidationClasses(age, isAgeValid, "age-feedback", "Valid.", "Assigned age must register 16 - 80.");
+        toggleValidationClasses(gender, isGenderValid, "gender-feedback", "Valid.", "Declare student gender.");
+        toggleValidationClasses(dept, isDeptValid, "department-feedback", "Valid.", "Assigned major is required.");
+        toggleValidationClasses(pwd, isPwdValid, "password-feedback", "Valid PIN Key.", "Complete uppercase, integer, length rules.");
+
+        if (!isFNameValid || !isLNameValid || !isEmailValid || !isPhoneValid || !isAgeValid || !isGenderValid || !isDeptValid || !isPwdValid) {
+          window.showToast("Verification failed. Please review highlighted form elements.", "error");
+          return;
+        }
+
+        const spinner = document.getElementById("global-spinner");
+        spinner.classList.add("active");
+
+        try {
+          // Payload preparation
+          const payload = {
+            firstName: fName.value.trim(),
+            lastName: lName.value.trim(),
+            email: email.value.trim(),
+            phone: phone.value.trim(),
+            age: age.value,
+            gender: gender.value,
+            department: dept.value,
+            university: document.getElementById("university").value.trim(),
+            address: document.getElementById("address").value.trim()
+          };
+
+          const response = await fetch("/api/students", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(payload)
+          });
+
+          const result = await response.json();
+
+          if (response.ok && result.success) {
+            window.showToast(`Candidate Onboarded successfully: STU-ID generated!`, "success");
+            form.reset();
+            
+            // Wipe format indicators
+            [fName, lName, email, phone, age, gender, dept, pwd].forEach(el => {
+              el.classList.remove("valid", "invalid");
+              const feedback = document.getElementById(`${el.id}-feedback`);
+              if (feedback) feedback.textContent = "";
+            });
+            ["pwd-check-length", "pwd-check-uppercase", "pwd-check-number"].forEach(id => {
+              const el = document.getElementById(id);
+              if (el) el.style.color = "var(--text-muted)";
+            });
+
+            // Redirect smoothly to Roster directory after 1.5s
+            setTimeout(() => {
+              window.location.href = "/dashboard";
+            }, 1500);
+          } else {
+            throw new Error(result.error || "Network error submitting admissions ticket.");
+          }
+        } catch (err) {
+          console.error("Admissions subjection crash:", err);
+          window.showToast(err.message || "Failed onboarding candidate. Validate network connection.", "error");
+        } finally {
+          spinner.classList.remove("active");
+        }
+      });
+    }
+
+    // Helper functions
+    function validateRequired(input, feedbackId, succMsg) {
+      const val = input.value.trim();
+      const valid = val.length >= 2;
+      toggleValidationClasses(input, valid, feedbackId, succMsg, "Required attribute: at least 2 char letters.");
+      return valid;
+    }
+
+    function toggleValidationClasses(input, isValid, feedbackId, succMsg, errMsg) {
+      const feedback = document.getElementById(feedbackId);
+      if (isValid) {
+        input.classList.remove("invalid");
+        input.classList.add("valid");
+        feedback.textContent = succMsg;
+        feedback.className = "input-feedback success";
+      } else {
+        input.classList.remove("valid");
+        input.classList.add("invalid");
+        feedback.textContent = errMsg;
+        feedback.className = "input-feedback error";
+      }
+    }
+
+    function updatePasswordIndicator(indicatorId, isValid) {
+      const el = document.getElementById(indicatorId);
+      if (el) {
+        el.style.color = isValid ? "var(--color-success)" : "var(--color-danger)";
+      }
+    }
+  </script>
+</body>
+</html>

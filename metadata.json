@@ -1,0 +1,6 @@
+{
+  "name": "Student Management System",
+  "description": "A handmade, professional student management dashboard utilizing vanilla HTML5, CSS3, JS, and Express.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

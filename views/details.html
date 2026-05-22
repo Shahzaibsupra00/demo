@@ -1,0 +1,556 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="View comprehensive student profiles, university academic tracks, residential data, and attach interactive feedback notes dynamically connected to the system core.">
+  <meta name="author" content="Web Engineering Team">
+  <title>Student Academic Portfolio | Global Institute of Technology</title>
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+
+  <!-- 1. GENERAL DESIGN HEADER -->
+  <header class="site-header">
+    <div class="container header-container">
+      <a href="/" class="logo-link">
+        <div class="logo-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10v6M2 10l10-5 10 5-10 5z"></path><path d="M6 12v5c0 2 2 3 6 3s6-1 6-3v-5"></path></svg>
+        </div>
+        <span>Global Institute</span>
+      </a>
+
+      <!-- Navigation links -->
+      <nav class="main-nav" id="main-navigation">
+        <ul class="nav-list">
+          <li><a href="/" class="nav-link">Home</a></li>
+          <li><a href="/dashboard" class="nav-link">Dashboard</a></li>
+          <li><a href="/add-student" class="nav-link">Admissions</a></li>
+          <li><a href="/about" class="nav-link">About Us</a></li>
+          <li><a href="/contact" class="nav-link">Contact</a></li>
+        </ul>
+      </nav>
+
+      <div class="header-actions">
+        <!-- Theme selectors -->
+        <div class="theme-toggle-btn" id="theme-toggle" title="Switch Theme">
+          <svg class="sun-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
+          <svg class="moon-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+        </div>
+
+        <div class="hamburger" id="mobile-hamburger">
+          <div class="hamburger-box">
+            <span class="hamburger-inner"></span>
+            <span class="hamburger-inner"></span>
+            <span class="hamburger-inner"></span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- 2. MAIN CORE LAYOUT FRAME -->
+  <main class="container" style="padding-top: var(--spacing-xl); padding-bottom: var(--spacing-xxl);">
+    
+    <!-- Navigation pointer return -->
+    <section style="margin-bottom: var(--spacing-lg); display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: var(--spacing-md);">
+      <a href="/dashboard" style="display: inline-flex; align-items: center; gap: 6px; font-weight: 500;">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+        <span>Back to Student Console</span>
+      </a>
+      
+      <div style="display: flex; gap: var(--spacing-sm);">
+        <button class="btn btn-secondary btn-sm" id="btn-edit-student-trigger">
+          <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20h9"></path><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path></svg>
+          Edit Profile
+        </button>
+        <button class="btn btn-danger btn-sm" id="btn-delete-student-trigger">
+          <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg>
+          Destroy Record
+        </button>
+      </div>
+    </section>
+
+    <!-- CORE ERROR CONTAINER (if no student ID detected) -->
+    <section class="empty-state" id="details-error-card" style="display: none;">
+      <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg>
+      <h3>Student Lookup Reference Failed</h3>
+      <p id="error-card-msg">No valid Student record parameters were discovered on this URL string. Return to directory and select a candidate.</p>
+      <a href="/dashboard" class="btn btn-primary btn-sm" style="margin-top: var(--spacing-md)">Return Directory</a>
+    </section>
+
+    <!-- PROFILES PORTFOLIO BENTO GRID -->
+    <section class="details-layout-grid" id="details-main-grid" style="display: none;">
+      
+      <!-- LEFT BRIEF CARD -->
+      <article class="details-profile-card">
+        <img class="details-avatar-big" id="student-main-pic" src="" alt="Student Profile Picture" onerror="this.src='https://robohash.org/unknown?set=set5'" referrerpolicy="no-referrer"/>
+        <h3 id="student-main-fullname">...</h3>
+        <p class="details-sub" id="student-main-tagline">...</p>
+        
+        <div style="margin-bottom: var(--spacing-lg);">
+          <span class="badge" id="student-main-status-badge">...</span>
+        </div>
+
+        <div class="details-meta-list">
+          <div class="details-meta-row">
+            <strong>Unique Registry No:</strong>
+            <span id="student-main-id" style="font-family: var(--font-mono); font-size: 0.8rem;">...</span>
+          </div>
+          <div class="details-meta-row">
+            <strong>Institutional ID:</strong>
+            <span id="student-main-id2" style="font-family: var(--font-mono); font-size: 0.8rem;">...</span>
+          </div>
+          <div class="details-meta-row">
+            <strong>Matriculation Date:</strong>
+            <span id="student-main-enroll">...</span>
+          </div>
+        </div>
+
+        <!-- Mini Achievements spotlight gallery -->
+        <div style="border-top: 1px solid var(--border-color); padding-top: var(--spacing-md); text-align: left;">
+          <h4 style="font-size: 0.85rem; text-transform: uppercase; color: var(--text-muted); margin-bottom: var(--spacing-sm);">Active Campus Badges</h4>
+          <div style="display: flex; gap: var(--spacing-xs); flex-wrap: wrap;">
+            <span style="background: var(--color-primary-soft); color: var(--color-primary); padding: 4px 8px; border-radius: 4px; font-size: 0.75rem; font-weight: 600;">Honor Society</span>
+            <span style="background: var(--color-accent-soft); color: var(--color-accent); padding: 4px 8px; border-radius: 4px; font-size: 0.75rem; font-weight: 600;">IEEE Member</span>
+            <span style="background: var(--color-orange-soft); color: var(--color-orange); padding: 4px 8px; border-radius: 4px; font-size: 0.75rem; font-weight: 600;">Varsity Team</span>
+          </div>
+        </div>
+      </article>
+
+      <!-- RIGHT DATA BLOCKS AND INTERACTIVE CHAT NOTES -->
+      <section style="display: flex; flex-direction: column; gap: var(--spacing-lg);">
+        
+        <!-- Specification data bento card -->
+        <article class="student-spec-info-card">
+          <h3 class="details-spec-heading">
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polygon points="12 2 2 7 12 12 22 7 12 2"></polygon><polyline points="2 17 12 22 22 17"></polyline><polyline points="2 12 12 17 22 12"></polyline></svg>
+            Academic & Contact Archives
+          </h3>
+
+          <div class="details-info-grid">
+            <div class="info-item">
+              <h4>Declared department / Major</h4>
+              <p id="info-dept">...</p>
+            </div>
+            <div class="info-item">
+              <h4>Campus location / Institute</h4>
+              <p id="info-univ">...</p>
+            </div>
+            <div class="info-item">
+              <h4>Institutional Email</h4>
+              <p id="info-email" style="text-transform: lowercase;">...</p>
+            </div>
+            <div class="info-item">
+              <h4>Phone connection</h4>
+              <p id="info-phone">...</p>
+            </div>
+            <div class="info-item">
+              <h4>Declared Candidate Age</h4>
+              <p id="info-age">...</p>
+            </div>
+            <div class="info-item">
+              <h4>Declared Candidate Gender</h4>
+              <p id="info-gender" style="text-transform: capitalize;">...</p>
+            </div>
+          </div>
+
+          <!-- Residence and complex -->
+          <div style="border-top: 1px solid var(--border-color); padding-top: var(--spacing-lg);">
+            <h4 style="font-size: 0.8rem; text-transform: uppercase; color: var(--text-muted); margin-bottom: var(--spacing-xs);">Residential Housing complex info</h4>
+            <p id="info-address" style="font-weight: 500;">...</p>
+          </div>
+        </article>
+
+        <!-- STICKY FEEDBACK NOTE SECTION -->
+        <article class="student-spec-info-card feedback-box-section">
+          <h3 class="feedback-headline">Administrative Logs & Sticky Memo Notes</h3>
+          <p style="font-size: 0.85rem; color: var(--text-secondary); margin-bottom: var(--spacing-md);">Add permanent faculty oversight, disciplinary files, or administrative remarks as yellow sticky notes attached to this candidate portfolio.</p>
+          
+          <textarea class="feedback-textarea" placeholder="Type oversight comments, syllabus updates, or advising warnings here..." id="admissions-memo-textarea"></textarea>
+          
+          <div style="text-align: right;">
+            <button class="btn btn-accent btn-sm" id="btn-attach-memo">
+              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+              Attach Memo Note
+            </button>
+          </div>
+
+          <!-- Notes stream -->
+          <aside class="notes-stack" id="memos-container">
+            <!-- Append dynamic memo notes -->
+          </aside>
+        </article>
+
+      </section>
+
+    </section>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-bottom">
+      <p>© 2026 Global Institute of Technology. Crafted by university developers.</p>
+    </div>
+  </footer>
+
+  <!-- DYNAMIC UPDATE PROFILE FORM MODAL (CRUD - PUT OPERATIONAL DEMAND) -->
+  <div class="modal-overlay" id="edit-student-modal">
+    <div class="modal" style="max-width: 500px">
+      <div class="modal-header">
+        <h3 class="modal-title">Edit Candidate Profile</h3>
+        <span class="modal-close" id="edit-modal-close">&times;</span>
+      </div>
+      <form id="edit-student-records-form">
+        <div class="modal-body" style="max-height: 400px; overflow-y: auto; padding-right: 6px;">
+          
+          <div class="form-row-2">
+            <div class="form-group">
+              <label for="edit-firstName" class="form-label">First Name</label>
+              <input type="text" id="edit-firstName" name="firstName" class="form-input" required>
+            </div>
+            <div class="form-group">
+              <label for="edit-lastName" class="form-label">Last Name</label>
+              <input type="text" id="edit-lastName" name="lastName" class="form-input" required>
+            </div>
+          </div>
+
+          <div class="form-row-2">
+            <div class="form-group">
+              <label for="edit-email" class="form-label">Email</label>
+              <input type="email" id="edit-email" name="email" class="form-input" required>
+            </div>
+            <div class="form-group">
+              <label for="edit-phone" class="form-label">Phone</label>
+              <input type="text" id="edit-phone" name="phone" class="form-input" required>
+            </div>
+          </div>
+
+          <div class="form-row-2">
+            <div class="form-group">
+              <label for="edit-age" class="form-label">Age</label>
+              <input type="number" id="edit-age" name="age" class="form-input" min="16" max="80" required>
+            </div>
+            <div class="form-group">
+              <label for="edit-status" class="form-label">Academic Status</label>
+              <select id="edit-status" name="status" class="form-input" required style="cursor: pointer;">
+                <option value="Active">Active</option>
+                <option value="Suspended">Suspended</option>
+                <option value="Graduated">Graduated</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="edit-department" class="form-label">Major Department</label>
+            <select id="edit-department" name="department" class="form-input" required style="cursor: pointer;">
+              <option value="Computer Science & Engineering">Computer Science & Engineering</option>
+              <option value="Electrical & Electronic Engineering">Electrical & Electronic Engineering</option>
+              <option value="Mechanical & Aerospace Engineering">Mechanical & Aerospace Engineering</option>
+              <option value="Business Administration & Technology">Business Administration & Technology</option>
+              <option value="Civil & Environmental Engineering">Civil & Environmental Engineering</option>
+              <option value="Biomedical Engineering & Biotech">Biomedical Engineering & Biotech</option>
+              <option value="Data Science & Analytics">Data Science & Analytics</option>
+              <option value="Cybersecurity & Digital Forensics">Cybersecurity & Digital Forensics</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="edit-university" class="form-label">University Name</label>
+            <input type="text" id="edit-university" name="university" class="form-input" required>
+          </div>
+
+          <div class="form-group">
+            <label for="edit-address" class="form-label">Residential Dorm Location</label>
+            <input type="text" id="edit-address" name="address" class="form-input">
+          </div>
+
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary btn-sm" id="btn-edit-cancel">Cancel Profile</button>
+          <button type="submit" class="btn btn-primary btn-sm" id="btn-edit-save">Save Portfolio</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- GENERIC DELETION WIRE MODAL -->
+  <div class="modal-overlay" id="details-delete-modal">
+    <div class="modal">
+      <div class="modal-header">
+        <h3 class="modal-title" style="color: var(--color-danger)">Permanently Trash Record</h3>
+        <span class="modal-close" id="det-del-close">&times;</span>
+      </div>
+      <div class="modal-body">
+        <p>This action destroys student registration keys. Confirming will wipe this candidate off directories permanently.</p>
+        <p style="font-size: 0.8rem; background: var(--bg-tertiary); padding: 8px 12px; border-radius: 4px; color: var(--text-muted); margin-top: 10px;">Warning: Record cleanup is instantaneous and cannot be reverted.</p>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-secondary btn-sm" id="btn-det-del-cancel">Cancel</button>
+        <button class="btn btn-danger btn-sm" id="btn-det-del-confirm">Destroy Now</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="spinner-backdrop" id="global-spinner">
+    <div class="spinner"></div>
+  </div>
+
+  <script src="/js/main.js" type="module"></script>
+  
+  <script type="module">
+    let studentId = null;
+    let studentData = null;
+
+    document.addEventListener("DOMContentLoaded", () => {
+      const params = new URLSearchParams(window.location.search);
+      studentId = params.get("id");
+
+      if (!studentId) {
+        showErrorPage("No valid candidate ID mapped in search parameter. Go to directories.");
+        return;
+      }
+
+      loadStudentDetails();
+      setupInteractiveMemos();
+      setupEditFormModal();
+      setupDeleteModal();
+    });
+
+    // Fetch call targeting single candidate
+    async function loadStudentDetails() {
+      const spinner = document.getElementById("global-spinner");
+      spinner.classList.add("active");
+
+      try {
+        const response = await fetch(`/api/students/${studentId}`);
+        if (!response.ok) {
+          throw new Error("Target student not discovered in memory indexes.");
+        }
+        studentData = await response.json();
+        populateFields(studentData);
+        
+        document.getElementById("details-main-grid").style.display = "grid";
+        document.getElementById("details-error-card").style.display = "none";
+      } catch (err) {
+        console.error("Details loading failed:", err);
+        showErrorPage(err.message);
+      } finally {
+        spinner.classList.remove("active");
+      }
+    }
+
+    // Populate DOM labels
+    function populateFields(data) {
+      document.getElementById("student-main-fullname").textContent = data.fullName;
+      document.getElementById("student-main-tagline").textContent = data.department;
+      document.getElementById("student-main-pic").src = data.image || `https://robohash.org/${data.firstName}?set=set5`;
+      
+      const badge = document.getElementById("student-main-status-badge");
+      badge.textContent = data.status;
+      badge.className = `badge ${data.status === "Active" ? "badge-active" : data.status === "Suspended" ? "badge-suspended" : "badge-graduated"}`;
+
+      document.getElementById("student-main-id").textContent = data.id;
+      document.getElementById("student-main-id2").textContent = data.studentId;
+      document.getElementById("student-main-enroll").textContent = data.enrollmentDate;
+
+      // Specifications
+      document.getElementById("info-dept").textContent = data.department;
+      document.getElementById("info-univ").textContent = data.university;
+      document.getElementById("info-email").textContent = data.email;
+      document.getElementById("info-phone").textContent = data.phone;
+      document.getElementById("info-age").textContent = `${data.age} years of age`;
+      document.getElementById("info-gender").textContent = data.gender;
+      document.getElementById("info-address").textContent = data.address || "Campus Quad Residences";
+    }
+
+    function showErrorPage(msg) {
+      document.getElementById("details-main-grid").style.display = "none";
+      const errCard = document.getElementById("details-error-card");
+      errCard.style.display = "block";
+      document.getElementById("error-card-msg").textContent = msg;
+    }
+
+    // Interactive Notes Stack
+    function setupInteractiveMemos() {
+      const attachBtn = document.getElementById("btn-attach-memo");
+      const textarea = document.getElementById("admissions-memo-textarea");
+      const listContainer = document.getElementById("memos-container");
+
+      if (!attachBtn || !textarea || !listContainer) return;
+
+      // Seed core initial warnings ifCS Majors
+      let initialMemos = JSON.parse(localStorage.getItem(`memos-${studentId}`)) || [];
+      if (initialMemos.length === 0) {
+        initialMemos = [
+          { text: "Enrolled in active campus systems with clear registration indicators. Advisor map is pending.", time: "Institutional System Log" }
+        ];
+        localStorage.setItem(`memos-${studentId}`, JSON.stringify(initialMemos));
+      }
+
+      const drawNotes = () => {
+        listContainer.innerHTML = "";
+        initialMemos.forEach((item) => {
+          const noteNode = document.createElement("article");
+          noteNode.className = "sticky-note";
+          noteNode.innerHTML = `
+            <p>${item.text}</p>
+            <div class="sticky-note-time">${item.time}</div>
+          `;
+          listContainer.appendChild(noteNode);
+        });
+      };
+
+      drawNotes();
+
+      attachBtn.addEventListener("click", () => {
+        const val = textarea.value.trim();
+        if (!val) {
+          window.showToast("Memo message lines cannot be submitted empty.", "error");
+          return;
+        }
+
+        const formattedTime = new Date().toLocaleString("en-US", { hour12: true, month: "short", day: "numeric", hour: "2-digit", minute: "2-digit" });
+        initialMemos.unshift({ text: val, time: `Advising Advisor • ${formattedTime}` });
+        localStorage.setItem(`memos-${studentId}`, JSON.stringify(initialMemos));
+        
+        drawNotes();
+        textarea.value = "";
+        window.showToast("Memo note pinned to Student portfolio.", "success");
+      });
+    }
+
+    // Edit profile modular forms (CRUD PUT)
+    function setupEditFormModal() {
+      const modal = document.getElementById("edit-student-modal");
+      const triggerBtn = document.getElementById("btn-edit-student-trigger");
+      const closeX = document.getElementById("edit-modal-close");
+      const cancelBtn = document.getElementById("btn-edit-cancel");
+      const editForm = document.getElementById("edit-student-records-form");
+
+      const toggleModal = (show) => {
+        if (show) {
+          // Pre-populate input values
+          document.getElementById("edit-firstName").value = studentData.firstName;
+          document.getElementById("edit-lastName").value = studentData.lastName;
+          document.getElementById("edit-email").value = studentData.email;
+          document.getElementById("edit-phone").value = studentData.phone;
+          document.getElementById("edit-age").value = studentData.age;
+          document.getElementById("edit-status").value = studentData.status;
+          document.getElementById("edit-department").value = studentData.department;
+          document.getElementById("edit-university").value = studentData.university;
+          document.getElementById("edit-address").value = studentData.address || "";
+
+          modal.classList.add("open");
+        } else {
+          modal.classList.remove("open");
+        }
+      };
+
+      if (triggerBtn) triggerBtn.addEventListener("click", () => toggleModal(true));
+      if (closeX) closeX.addEventListener("click", () => toggleModal(false));
+      if (cancelBtn) cancelBtn.addEventListener("click", () => toggleModal(false));
+      modal.addEventListener("click", (e) => {
+        if (e.target === modal) toggleModal(false);
+      });
+
+      // Submit PUT request on the fly
+      if (editForm) {
+        editForm.addEventListener("submit", async (e) => {
+          e.preventDefault();
+
+          const spinner = document.getElementById("global-spinner");
+          spinner.classList.add("active");
+          toggleModal(false);
+
+          try {
+            const formData = {
+              firstName: document.getElementById("edit-firstName").value.trim(),
+              lastName: document.getElementById("edit-lastName").value.trim(),
+              email: document.getElementById("edit-email").value.trim(),
+              phone: document.getElementById("edit-phone").value.trim(),
+              age: document.getElementById("edit-age").value,
+              status: document.getElementById("edit-status").value,
+              department: document.getElementById("edit-department").value,
+              university: document.getElementById("edit-university").value.trim(),
+              address: document.getElementById("edit-address").value.trim()
+            };
+
+            const response = await fetch(`/api/students/${studentId}`, {
+              method: "PUT",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify(formData)
+            });
+
+            const result = await response.json();
+
+            if (response.ok && result.success) {
+              window.showToast("Candidate portfolio updated successfully.", "success");
+              studentData = result.student;
+              populateFields(studentData);
+            } else {
+              throw new Error(result.error || "Failed sending updates.");
+            }
+          } catch (err) {
+            console.error("Updates error:", err);
+            window.showToast(err.message, "error");
+          } finally {
+            spinner.classList.remove("active");
+          }
+        });
+      }
+    }
+
+    // Delete Operations controller links
+    function setupDeleteModal() {
+      const modal = document.getElementById("details-delete-modal");
+      const triggerBtn = document.getElementById("btn-delete-student-trigger");
+      const closeX = document.getElementById("det-del-close");
+      const cancelBtn = document.getElementById("btn-det-del-cancel");
+      const confirmBtn = document.getElementById("btn-det-del-confirm");
+
+      const toggleModal = (show) => {
+        if (show) modal.classList.add("open");
+        else modal.classList.remove("open");
+      };
+
+      if (triggerBtn) triggerBtn.addEventListener("click", () => toggleModal(true));
+      if (closeX) closeX.addEventListener("click", () => toggleModal(false));
+      if (cancelBtn) cancelBtn.addEventListener("click", () => toggleModal(false));
+      modal.addEventListener("click", (e) => {
+        if (e.target === modal) toggleModal(false);
+      });
+
+      if (confirmBtn) {
+        confirmBtn.addEventListener("click", async () => {
+          toggleModal(false);
+          const spinner = document.getElementById("global-spinner");
+          spinner.classList.add("active");
+
+          try {
+            const response = await fetch(`/api/students/${studentId}`, {
+              method: "DELETE"
+            });
+            const result = await response.json();
+
+            if (response.ok && result.success) {
+              window.showToast("Record successfully destroyed. Redirecting...", "success");
+              setTimeout(() => {
+                window.location.href = "/dashboard";
+              }, 1500);
+            } else {
+              throw new Error(result.error || "Deletion command failed.");
+            }
+          } catch (err) {
+            console.error("Deletion logic failure:", err);
+            window.showToast("Record wiping failed. Valid network connection required.", "error");
+          } finally {
+            spinner.classList.remove("active");
+          }
+        });
+      }
+    }
+  </script>
+</body>
+</html>
